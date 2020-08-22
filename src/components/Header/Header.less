@@ -1,0 +1,34 @@
+@primary-default: #e8ab6d;
+@second-default: #2196f3;
+
+.Header {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    //background: #005e9a;
+    background: @primary-default;
+    color: #fff;
+    font-size: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
+    a {
+        color: inherit;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+    }
+    .HeaderTitleWrapper{
+        padding-left: 30px;
+        margin: 0;
+    }
+    .LogoWrapper{
+        max-width: 300px;
+    }
+    .LinkWrapper{
+        display: flex;
+        justify-content: space-between;
+        min-width: 150px;
+    }
+}
