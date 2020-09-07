@@ -11,23 +11,21 @@ class WelcomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // eslint-disable-next-line react/no-unused-state
             activeTab: '1',
         };
         this.changeTab = this.changeTab.bind(this);
     }
 
     changeTab(key) {
+        console.log(key);
         this.setState({
-            // eslint-disable-next-line react/no-unused-state
             activeTab: key,
         });
     }
 
     render() {
-        const {
-            activeTab, signup, login,
-        } = this.props;
+        const { activeTab } = this.state;
+        const { signup, login } = this.props;
 
         return (
             <MainContent>
