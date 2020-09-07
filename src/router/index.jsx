@@ -1,17 +1,58 @@
-import React, { Component, Fragment } from 'react';
-import RouterView from 'router-view-dom';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { createBrowserHistory } from 'history';
+import {
+    Redirect, Route, Router, Switch,
+} from 'react-router-dom';
 
-import routers from './routers';
+export const history = createBrowserHistory();
 
-class Router extends Component {
-    render() {
-        return (
-            <Fragment>
-                <RouterView routers={routers} />
-            </Fragment>
-        );
-    }
-}
+const renderComponent = (route, props, extraProps) => (
+    <route.component {...props} {...extraProps} route={route} />
+);
 
+export const next = (path) => (
+    path || true
+);
 
-export default Router;
+const RenderRoutes = ({ routers }, { extraProps = {} }) => (routers ? (
+    <Router history={history}>
+        <Switch>
+            {routers && routers.map((route, i) => (
+                <Route
+                    key={route.key || i}
+                    path={route.path}
+                    exact={route.exact}
+                    strict={route.strict}
+                    render={(props) => {
+                        const { before } = route;
+
+                        if (Object.prototype.hasOwnProperty.call(route, 'before')
+                            && typeof before === 'function') {
+                            const result = before();
+
+                            if (typeof result === 'string') {
+                                return <Redirect to={result} />;
+                            }
+
+                            return renderComponent(route, props, extraProps);
+                        }
+
+                        return renderComponent(route, props, extraProps);
+                    }}
+                />
+            ))}
+        </Switch>
+    </Router>
+) : null);
+
+RenderRoutes.propTypes = {
+    routers: PropTypes.arrayOf(PropTypes.shape({
+        key: PropTypes.string,
+        path: PropTypes.string,
+        exact: PropTypes.bool,
+        before: PropTypes.func,
+    })).isRequired,
+};
+
+export default RenderRoutes;

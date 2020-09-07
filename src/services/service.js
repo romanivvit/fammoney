@@ -1,16 +1,32 @@
+import axios from 'axios';
+
 class Service {
-    get generalHeaders() {
-        return {
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Token': this.jwtToken,
-            },
-        };
+    static #jwt = undefined;
+
+    static #generalConfig = (isSecure) => ({
+        headers: {
+            ...(isSecure === true ? { Authorization: `Bearer ${Service.#jwt}` } : {}),
+        },
+    });
+
+    static setConfiguration({ jwt }) {
+        this.#jwt = jwt;
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    get jwtToken() {
-        return 'uahhhAIaFd08ZaAhCP_qgnuDGepQh3E1-WBQ94_P2R9s';
+    static getRequest(url, { isSecure } = { isSecure: true }) {
+        return axios.get(url, Service.#generalConfig(isSecure));
+    }
+
+    static postRequest(url, data, { isSecure } = { isSecure: true }) {
+        return axios.post(url, data, Service.#generalConfig(isSecure));
+    }
+
+    static putRequest(url, data, { isSecure } = { isSecure: true }) {
+        return axios.put(url, data, Service.#generalConfig(isSecure));
+    }
+
+    static deleteRequest(url, { isSecure } = { isSecure: true }) {
+        return axios.delete(url, Service.#generalConfig(isSecure));
     }
 }
 
