@@ -15,36 +15,37 @@ export const next = (path) => (
     path || true
 );
 
-const RenderRoutes = ({ routers }, { extraProps = {} }) => (routers ? (
-    <Router history={history}>
-        <Switch>
-            {routers && routers.map((route, i) => (
-                <Route
-                    key={route.key || i}
-                    path={route.path}
-                    exact={route.exact}
-                    strict={route.strict}
-                    render={(props) => {
-                        const { before } = route;
+const RenderRoutes = ({ routers }, { extraProps = {} }) => (routers
+    ? (
+        <Router history={history}>
+            <Switch>
+                {routers && routers.map((route, i) => (
+                    <Route
+                        key={route.key || i}
+                        path={route.path}
+                        exact={route.exact}
+                        strict={route.strict}
+                        render={(props) => {
+                            const { before } = route;
 
-                        if (Object.prototype.hasOwnProperty.call(route, 'before')
+                            if (Object.prototype.hasOwnProperty.call(route, 'before')
                             && typeof before === 'function') {
-                            const result = before();
+                                const result = before();
 
-                            if (typeof result === 'string') {
-                                return <Redirect to={result} />;
+                                if (typeof result === 'string') {
+                                    return <Redirect to={result} />;
+                                }
+
+                                return renderComponent(route, props, extraProps);
                             }
 
                             return renderComponent(route, props, extraProps);
-                        }
-
-                        return renderComponent(route, props, extraProps);
-                    }}
-                />
-            ))}
-        </Switch>
-    </Router>
-) : null);
+                        }}
+                    />
+                ))}
+            </Switch>
+        </Router>
+    ) : null);
 
 RenderRoutes.propTypes = {
     routers: PropTypes.arrayOf(PropTypes.shape({

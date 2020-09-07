@@ -7,13 +7,25 @@ const redirectToDashboard = (IsAuthenticated) => () => (IsAuthenticated ? '/dash
 // eslint-disable-next-line no-unused-vars
 const checkAuthWithRedirect = (IsAuthenticated) => () => (IsAuthenticated ? '/dashboard' : '/login');
 
-const routers = () => [
+const routers = (IsAuthenticated) => [
     {
         path: '/',
-        strict: true,
+        exact: true,
         component: WelcomePage,
-        // before: checkAuthWithRedirect(IsAuthenticated),
+        before: checkAuthWithRedirect(IsAuthenticated),
 
+    },
+    {
+        path: '/login',
+        exact: true,
+        component: WelcomePage,
+        before: redirectToDashboard(IsAuthenticated),
+    },
+    {
+        path: '/registration',
+        exact: true,
+        component: WelcomePage,
+        before: redirectToDashboard(IsAuthenticated),
     },
 ];
 

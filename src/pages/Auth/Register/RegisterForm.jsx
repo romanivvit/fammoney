@@ -14,7 +14,8 @@ import {
 import { QuestionCircleOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
-
+// eslint-disable-next-line no-unused-vars
+const AutoCompleteOption = AutoComplete.Option;
 const residences = [
     {
         value: 'zhejiang',
@@ -80,9 +81,7 @@ const tailFormItemLayout = {
     },
 };
 
-const RegisterForm = () => {
-    const [form] = Form.useForm();
-
+const RegistrationForm = () => {
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
     };
@@ -118,7 +117,6 @@ const RegisterForm = () => {
     return (
         <Form
             {...formItemLayout}
-            form={form}
             name="register"
             onFinish={onFinish}
             initialValues={{
@@ -287,7 +285,8 @@ const RegisterForm = () => {
                 <Checkbox>
                     I have read the
                     {' '}
-                    <a href="/">agreement</a>
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                    <a href="">agreement</a>
                 </Checkbox>
             </Form.Item>
             <Form.Item {...tailFormItemLayout}>
@@ -299,4 +298,4 @@ const RegisterForm = () => {
     );
 };
 
-export default RegisterForm;
+export default RegistrationForm;

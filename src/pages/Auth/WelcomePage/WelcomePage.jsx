@@ -17,7 +17,6 @@ class WelcomePage extends Component {
     }
 
     changeTab(key) {
-        console.log(key);
         this.setState({
             activeTab: key,
         });

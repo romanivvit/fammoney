@@ -1,7 +1,7 @@
 import Service from './service';
 
 class Login extends Service {
-    static #baseUrl = 'identity';
+    static #baseUrl = 'api';
 
     static login(data) {
         return this.postRequest(`${this.#baseUrl}/login`, data);

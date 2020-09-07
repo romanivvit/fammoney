@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Col } from 'antd';
-import { Link } from 'router-view-dom';
+import { Link } from 'react-router-dom';
 
 import './Header.less';
 
