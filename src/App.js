@@ -5,11 +5,11 @@ import { store } from './state/store';
 import RenderRoutes from './router';
 import routers from './router/routers';
 import WelcomePage from './pages/Auth/WelcomePage/WelcomePage';
-import { initialState, reducer } from './state/reducers/auth';
+import { initialState, authReducer } from './state/reducers/auth';
 import { setInterceptors } from './services/interceptors';
 
 const App = () => {
-    const [state, dispatch] = useReducer(reducer, initialState);
+    const [state, dispatch] = useReducer(authReducer, initialState);
 
     setInterceptors(process.env.REACT_APP_BASE_URL, dispatch);
 

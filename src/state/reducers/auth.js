@@ -17,11 +17,10 @@ export const initialState = {
     isLoading: false,
     error: undefined,
     tokenString: authStorage ? authStorage.tokenString : undefined,
-    role: authStorage && authStorage.roleName ? authStorage.roleName : undefined,
     user: authStorage && authStorage.user ? { ...authStorage.user, name: `${authStorage.user.firstName} ${authStorage.user.lastName}` } : {},
 };
 
-export const reducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOGIN_START:
             return {
@@ -35,7 +34,6 @@ export const reducer = (state = initialState, action) => {
                 isAuthenticated: true,
                 isLoading: false,
                 error: undefined,
-                role: action.payload.roleName,
                 tokenString: action.payload.tokenString,
             };
         case LOGIN_ERROR:
@@ -74,7 +72,6 @@ export const reducer = (state = initialState, action) => {
                 isAuthenticated: false,
                 tokenString: undefined,
                 error: undefined,
-                role: undefined,
                 user: {},
             };
         default:

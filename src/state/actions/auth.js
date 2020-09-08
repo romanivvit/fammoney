@@ -12,27 +12,45 @@ import Service from '../../services/service';
 import Login from '../../services/login';
 import Client from '../../services/client';
 
-export const doAccountsFetchSuccess = (payload) => ({
+// Login Actions
+export const doLoginStart = () => ({
+    type: LOGIN_START,
+});
+
+export const doLoginSuccess = (payload) => ({
     type: LOGIN_SUCCESS,
     payload,
 });
 
-// To be Changed
-export function getUserStart() {
-    return { type: GET_USER_START };
-}
+export const doLoginError = (payload) => ({
+    type: LOGIN_ERROR,
+    payload,
+});
 
-export function getUserSuccess(payload) {
-    return { type: GET_USER_SUCCESS, payload };
-}
+// Register Actions
+export const doRegisterStart = () => ({
+    type: GET_USER_START,
+});
 
-export function getUserError(payload) {
-    return { type: GET_USER_ERROR, payload };
-}
+export const doRegisterSuccess = (payload) => ({
+    type: GET_USER_SUCCESS,
+    payload,
+});
 
+export const doRegisterError = (payload) => ({
+    type: GET_USER_ERROR,
+    payload,
+});
+
+// Logout Actions
+export const doLogoutSuccess = () => ({
+    type: LOGOUT_SUCCESS,
+});
+
+// TODO TO be removed
 // eslint-disable-next-line consistent-return
 export async function getUser(dispatch) {
-    dispatch(getUserStart());
+    dispatch(doRegisterStart());
     try {
         const { data: userResponse } = await Client.overview();
         // eslint-disable-next-line no-undef
@@ -50,29 +68,17 @@ export async function getUser(dispatch) {
         localStorage.setItem(AUTH_STORAGE, JSON.stringify(info));
 
 
-        return dispatch(getUserSuccess(userResponse));
+        return dispatch(doRegisterSuccess(userResponse));
     } catch (error) {
-        console.log(error);
+        return dispatch(doRegisterError(error));
     }
-}
-
-export function loginStart() {
-    return { type: LOGIN_START };
-}
-
-export function loginSuccess(payload) {
-    return { type: LOGIN_SUCCESS, payload };
-}
-
-export function loginError(payload) {
-    return { type: LOGIN_ERROR, payload };
 }
 
 // eslint-disable-next-line consistent-return
 export async function login(dispatch, data) {
-    dispatch(loginStart());
+    dispatch(doLoginStart());
     try {
-        const { data: loginResponse } = await Login.signIn(data);
+        const { data: loginResponse } = await Login.login(data);
 
         // eslint-disable-next-line no-undef
         localStorage.setItem(AUTH_STORAGE, JSON.stringify(loginResponse));
@@ -81,21 +87,17 @@ export async function login(dispatch, data) {
             await getUser(dispatch);
         }, 0);
 
-        return dispatch(loginSuccess(loginResponse));
+        return dispatch(doLoginSuccess(loginResponse));
     } catch (error) {
-        console.log(error);
+        return dispatch(doLoginError(error));
     }
-}
-
-export function logoutSuccess() {
-    return { type: LOGOUT_SUCCESS };
 }
 
 export function logout(dispatch) {
     return new Promise((resolve) => {
         // eslint-disable-next-line no-undef
         localStorage.removeItem(AUTH_STORAGE);
-        dispatch(logoutSuccess());
+        dispatch(doLogoutSuccess());
         resolve();
     });
 }

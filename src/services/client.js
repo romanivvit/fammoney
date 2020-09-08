@@ -1,7 +1,7 @@
 import Service from './service';
 
 class Client extends Service {
-    static #baseUrl = 'students';
+    static #baseUrl = 'client';
 
     static overview() {
         return this.getRequest(`${this.#baseUrl}/overview`);
