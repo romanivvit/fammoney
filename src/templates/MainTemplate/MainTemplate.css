@@ -1,0 +1,11 @@
+.MainTemplate {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.MainTemplate .content {
+  flex: 1 0 auto;
+}
+.MainTemplate .footer {
+  flex: 0 0 auto;
+}

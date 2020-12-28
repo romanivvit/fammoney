@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MainContent from '../../../templates/MainContent';
+import MainContent from '../../../templates/MainTemplate';
 import LoginForm from './LoginForm';
 import '../WelcomePage/WelcomePage.css';
 

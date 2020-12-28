@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Col } from 'antd';
 import { Link } from 'react-router-dom';
 
-import './Header.less';
+import './Header.css';
 
 class Header extends Component {
     render() {
