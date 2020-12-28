@@ -1,4 +1,4 @@
-import WelcomePage from '../pages/Auth/WelcomePage/WelcomePage';
+import WelcomePage from '../pages/Authentication/WelcomePage/WelcomePage';
 
 // eslint-disable-next-line no-unused-vars
 const checkAuth = (IsAuthenticated) => () => (IsAuthenticated ? false : '/login');

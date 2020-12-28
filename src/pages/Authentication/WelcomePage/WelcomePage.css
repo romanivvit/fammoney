@@ -17,7 +17,6 @@
 }
 .authForm {
   width: 100%;
-  min-height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
