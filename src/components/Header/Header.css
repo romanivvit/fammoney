@@ -1,0 +1,30 @@
+.Header {
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #e8ab6d;
+  color: #fff;
+  font-size: 20px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+.Header a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.Header .HeaderTitleWrapper {
+  padding-left: 30px;
+  margin: 0;
+}
+.Header .LogoWrapper {
+  max-width: 300px;
+}
+.Header .LinkWrapper {
+  display: flex;
+  justify-content: space-between;
+  min-width: 150px;
+}
