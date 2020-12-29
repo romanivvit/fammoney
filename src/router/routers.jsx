@@ -1,4 +1,4 @@
-import WelcomePage from '../pages/Authentication/WelcomePage/WelcomePage';
+import WelcomePageContainer from '../pages/Authentication/container/WelcomePage';
 
 // eslint-disable-next-line no-unused-vars
 const checkAuth = (IsAuthenticated) => () => (IsAuthenticated ? false : '/login');
@@ -11,20 +11,20 @@ const routers = (IsAuthenticated) => [
     {
         path: '/',
         exact: true,
-        component: WelcomePage,
+        component: WelcomePageContainer,
         before: checkAuthWithRedirect(IsAuthenticated),
 
     },
     {
         path: '/login',
         exact: true,
-        component: WelcomePage,
+        component: WelcomePageContainer,
         before: redirectToDashboard(IsAuthenticated),
     },
     {
-        path: '/registration',
+        path: '/register',
         exact: true,
-        component: WelcomePage,
+        component: WelcomePageContainer,
         before: redirectToDashboard(IsAuthenticated),
     },
 ];

@@ -1,4 +1,4 @@
-import { AUTH_STORAGE } from '../../constants/common';
+import { AUTH_STORAGE } from '../../constants/common/common';
 import {
     LOGIN_START,
     LOGIN_SUCCESS,

@@ -1,7 +1,7 @@
 import Service from './service';
 
-class Login extends Service {
-    static #baseUrl = 'api';
+class Authentication extends Service {
+    static #baseUrl = 'auth';
 
     static login(data) {
         return this.postRequest(`${this.#baseUrl}/login`, data);
@@ -12,4 +12,4 @@ class Login extends Service {
     }
 }
 
-export default Login;
+export default Authentication;

@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { store } from './state/store';
 import RenderRoutes from './router';
 import routers from './router/routers';
-import WelcomePage from './pages/Authentication/WelcomePage/WelcomePage';
+import WelcomePage from './pages/Authentication/components/WelcomePage/WelcomePage';
 import { initialState, authReducer } from './state/reducers/auth';
 import { setInterceptors } from './interceptors';
 

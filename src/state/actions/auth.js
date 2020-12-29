@@ -7,9 +7,7 @@ import {
     GET_USER_ERROR,
     LOGOUT_SUCCESS,
 } from '../constatns/auth';
-import { AUTH_STORAGE } from '../../constants/common';
-import Service from '../../services/service';
-import Login from '../../services/login';
+import { AUTH_STORAGE } from '../../constants/common/common';
 import Client from '../../services/client';
 
 // Login Actions
@@ -71,25 +69,6 @@ export async function getUser(dispatch) {
         return dispatch(doRegisterSuccess(userResponse));
     } catch (error) {
         return dispatch(doRegisterError(error));
-    }
-}
-
-// eslint-disable-next-line consistent-return
-export async function login(dispatch, data) {
-    dispatch(doLoginStart());
-    try {
-        const { data: loginResponse } = await Login.login(data);
-
-        // eslint-disable-next-line no-undef
-        localStorage.setItem(AUTH_STORAGE, JSON.stringify(loginResponse));
-        Service.setConfiguration({ jwt: loginResponse.tokenString });
-        setTimeout(async () => {
-            await getUser(dispatch);
-        }, 0);
-
-        return dispatch(doLoginSuccess(loginResponse));
-    } catch (error) {
-        return dispatch(doLoginError(error));
     }
 }
 

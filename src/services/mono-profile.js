@@ -23,8 +23,6 @@ class monoBank extends Service {
     getWebHook() {
         const that = this;
 
-        console.log(that.generalHeaders);
-
 
         return new Promise(((resolve, reject) => {
             axios.post(`${virtualDirPath}/personal/webhook`,

@@ -4,9 +4,9 @@ import { logout } from './state/actions/auth';
 export const setInterceptors = (baseURL, dispatch) => {
     axios.interceptors.request.use(
         (config) => {
-            config.baseURL = baseURL;
+            config.baseURL = `http://localhost:3001${baseURL}`;
             config.headers['Content-Type'] = 'application/json';
-            config.headers['X-Requested-With'] = 'XMLHttpRequest';
+            config.headers.Accept = 'application/json';
 
             return config;
         },
