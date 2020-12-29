@@ -4,7 +4,8 @@ import { logout } from './state/actions/auth';
 export const setInterceptors = (baseURL, dispatch) => {
     axios.interceptors.request.use(
         (config) => {
-            config.baseURL = `http://localhost:3001${baseURL}`;
+            // TODO Need to remove in prod mode
+            config.baseURL = `http://localhost:8888${baseURL}`;
             config.headers['Content-Type'] = 'application/json';
             config.headers.Accept = 'application/json';
 

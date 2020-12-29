@@ -3,11 +3,10 @@ import {
     Form,
     Input,
     Tooltip,
-    Select,
+    Button,
 } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 
-const { Option } = Select;
 const formItemLayout = {
     labelCol: {
         xs: {
@@ -27,23 +26,29 @@ const formItemLayout = {
     },
 };
 
-const RegistrationForm = () => {
+const tailFormItemLayout = {
+    wrapperCol: {
+        xs: {
+            span: 24,
+            offset: 0,
+        },
+        sm: {
+            span: 16,
+            offset: 8,
+        },
+    },
+};
+
+const RegistrationForm = ({ onSubmit }) => {
     const onFinish = (values) => {
+        console.log(values);
+        if (values.password === values.confirm) {
+            // TODO change to avoid mutation
+            delete values.confirm;
+            onSubmit(values);
+        }
         console.log('Received values of form: ', values);
     };
-
-    const prefixSelector = (
-        <Form.Item name="prefix" noStyle>
-            <Select
-                style={{
-                    width: 70,
-                }}
-            >
-                <Option value="86">+380</Option>
-                <Option value="87">+3</Option>
-            </Select>
-        </Form.Item>
-    );
 
     return (
         <Form
@@ -133,22 +138,10 @@ const RegistrationForm = () => {
                 <Input />
             </Form.Item>
 
-            <Form.Item
-                name="phone"
-                label="Phone Number"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input your phone number!',
-                    },
-                ]}
-            >
-                <Input
-                    addonBefore={prefixSelector}
-                    style={{
-                        width: '100%',
-                    }}
-                />
+            <Form.Item {...tailFormItemLayout}>
+                <Button type="primary" htmlType="submit">
+                    Register
+                </Button>
             </Form.Item>
         </Form>
     );

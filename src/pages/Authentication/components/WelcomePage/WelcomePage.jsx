@@ -9,7 +9,7 @@ import 'antd/dist/antd.css';
 
 const { TabPane } = Tabs;
 
-function WelcomePage({ signup, login }) {
+function WelcomePage({ register, login }) {
     const [activeTab, setActiveTab] = useState('1');
 
     const changeTab = (key) => {
@@ -37,7 +37,7 @@ function WelcomePage({ signup, login }) {
                                 <LoginForm onSubmit={login} />
                             </TabPane>
                             <TabPane tab="Register" key="2">
-                                <RegisterForm onSubmit={signup} />
+                                <RegisterForm onSubmit={register} />
                             </TabPane>
                         </Tabs>
                     </div>
@@ -48,11 +48,11 @@ function WelcomePage({ signup, login }) {
 }
 
 WelcomePage.propTypes = {
-    signup: func,
+    register: func,
     login: func,
 };
 WelcomePage.defaultProps = {
-    signup: undefined,
+    register: undefined,
     login: undefined,
 };
 

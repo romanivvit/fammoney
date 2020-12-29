@@ -7,7 +7,7 @@ import Service from '../../../../services/service';
 import {
     doLoginError,
     doLoginStart,
-    doLoginSuccess,
+    doLoginSuccess, doRegisterError, doRegisterStart, doRegisterSuccess,
     getUser,
 } from '../../../../state/actions/auth';
 
@@ -16,13 +16,12 @@ function WelcomePageContainer() {
 
     async function login(data) {
         dispatch(doLoginStart());
-        console.log(data);
         try {
             const { data: loginResponse } = await Authentication.login(data);
 
             // eslint-disable-next-line no-undef
-            localStorage.setItem(AUTH_STORAGE, JSON.stringify(loginResponse));
-            Service.setConfiguration({ jwt: loginResponse.tokenString });
+            localStorage.setItem(AUTH_STORAGE, JSON.stringify(loginResponse.jwtToken));
+            Service.setConfiguration({ jwt: loginResponse.jwtToken });
             setTimeout(async () => {
                 await getUser(dispatch);
             }, 0);
@@ -32,12 +31,31 @@ function WelcomePageContainer() {
             return dispatch(doLoginError(error));
         }
     }
-    const signup = () => {
-        console.log('signup success');
-    };
+    async function register(data) {
+        dispatch(doRegisterStart());
+        try {
+            const { data: userResponse } = await Authentication.register(data);
+            // eslint-disable-next-line no-undef
+            const info = JSON.parse(localStorage.getItem(AUTH_STORAGE));
+
+            info.user = {
+                id: userResponse.id,
+                name: userResponse.name,
+                email: userResponse.email,
+            };
+
+            // eslint-disable-next-line no-undef
+            localStorage.setItem(AUTH_STORAGE, JSON.stringify(info));
+
+
+            return dispatch(doRegisterSuccess(userResponse));
+        } catch (error) {
+            return dispatch(doRegisterError(error));
+        }
+    }
 
     return (
-        <WelcomePage signup={signup} login={login} />
+        <WelcomePage register={register} login={login} />
     );
 }
 

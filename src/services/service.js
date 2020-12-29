@@ -6,6 +6,8 @@ class Service {
     static #generalConfig = (isSecure) => ({
         headers: {
             ...(isSecure === true ? { Authorization: `Bearer ${Service.#jwt}` } : {}),
+            // 'Access-Control-Allow-Origin': '*',
+            // 'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
         },
     });
 
